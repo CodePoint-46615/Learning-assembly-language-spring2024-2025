@@ -1,0 +1,76 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+;VARIABLE DECLAIRATION
+A DB "HELLO WORLD$" 
+B DB "HELLO$" 
+NEWLINE DB 0AH,0DH,'$'
+NEW DB 10,13,'$'
+.CODE
+MAIN PROC 
+    ;1 TAKES SINGLE INPUT FROM USER
+    
+    ;2 SHOW SINGLE OUTPUT
+    ;9 STRING OUTPUT 
+    
+    MOV AX,@DATA
+    MOV DS, AX 
+    
+    MOV AH,9  ; AX=AH+AL
+    LEA DX,A
+    INT 21H
+    
+    ;NEWLINE
+    MOV AH,2
+    MOV DL,0AH
+    INT 21H
+    MOV DL,0DH
+    INT 21H  
+    
+    MOV AH,9
+    LEA DX,B
+    INT 21H  
+    
+    MOV AH,9
+    LEA DX,NEWLINE
+    INT 21H
+    
+    MOV AH,1 ;INPUT1
+    INT 21H
+    MOV BH,AL 
+   
+    
+    MOV AH,1;INPUT2 
+    INT 21H
+    MOV CH,AL 
+    
+    MOV AH,9
+    LEA DX,NEW
+    INT 21H
+    
+    MOV AH,2;OUTPUT1
+    MOV DL,BH
+    INT 21H
+    
+     MOV AH,2;OUTPUT2
+    MOV DL,CH
+    INT 21H 
+    
+    ADD BH,CH  ;BH=BH+CH 
+    SUB BH,48  ;30H
+    
+    MOV AH,9
+    LEA DX,NEWLINE
+    INT 21H 
+    
+    MOV AH,2;RESULT
+    MOV DL,BH
+    INT 21H
+     
+       
+       ;EXIT
+    MOV AH,4CH
+    INT 21H
+    MAIN ENDP
+END MAIN
+    

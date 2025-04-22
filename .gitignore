@@ -1,0 +1,9 @@
+# Ignore all script files
+*.sh
+*.bat
+*.ps1
+*.exe
+*.cmd
+*.docx
+*.pdf
+*.txt
