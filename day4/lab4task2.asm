@@ -1,8 +1,8 @@
 .model small
 .stack 100h
 .data
-msg db 0ah,0dh, "Hello, World $"
-b db 0ah,0dh,0ah,0dh, "Bye world $"
+    msg db 0ah,0dh, "Hello, World $"
+    b db 0ah,0dh,0ah,0dh, "Bye world $"
 .code
 main proc
   mov ax,@data
