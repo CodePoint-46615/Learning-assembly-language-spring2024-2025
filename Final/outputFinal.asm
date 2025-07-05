@@ -1,0 +1,41 @@
+.MODEL SMALL
+.DATA
+M1 DB 'THE NUM:','$'
+M2 DB 0AH,0DH,'THE NUM MAGIC IS: '
+C1 DB ?,'$'
+C2 DB 0AH,0DH, 'MAGIC STOPS: $'
+C3 DB 0AH,0DH, 'NO MAGIC NUM$'
+.CODE MAIN
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX
+    
+    MOV BL,'C'
+    MOV DL,BL
+    MOV AH,9
+    LEA DX,M1
+    INT 21H
+    MOV BH,0
+    MOV CX,16
+    MOV AH,2
+    L1:
+    SHL BL,1
+    JC L2
+    MOV DL,'0'
+    INT 21H
+    JMP L4
+    L2:
+    MOV DL,'1'
+    INT 21H
+    INC BH
+    L4:
+    LOOP L1
+    ADD BH,30H
+    MOV C1,BH
+    MOV AH,9
+    LEA DX,M2
+    INT 21H
+    MOV AH,4CH
+    INT 21H
+    MAIN ENDP
+END MAIN
